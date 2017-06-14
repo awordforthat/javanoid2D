@@ -6,12 +6,13 @@ public class BallController : MonoBehaviour {
 
 	private Vector2 velocity;
 	private Rigidbody2D rigidbody;
+	public float maxSpeed;
 
 	// Use this for initialization
 	void Start () {
 		rigidbody = GetComponent<Rigidbody2D> ();
-		rigidbody.velocity = new Vector2 (Random.Range(-15, 15)
-			, Random.Range(-10, -15));
+		rigidbody.velocity = new Vector2 (Random.Range(-maxSpeed, maxSpeed)
+			, Random.Range(-1, -maxSpeed));
 
 
 
