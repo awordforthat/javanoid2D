@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour {
 
-	private Vector2 velocity;
-	private Rigidbody2D rigidbody;
+
 	public float maxSpeed;
+	private Vector2 movement;
+	private Rigidbody2D rigidbody;
+
+
 
 	// Use this for initialization
 	void Start () {
 		rigidbody = GetComponent<Rigidbody2D> ();
-		rigidbody.velocity = new Vector2 (Random.Range(-maxSpeed, maxSpeed)
-			, Random.Range(-1, -maxSpeed));
 
+		rigidbody.velocity = new Vector2 (Random.Range(-1f, 1f)
+			, Random.Range(-1, -5f)).normalized * maxSpeed;
 
+	}
 
+	void OnCollisionEnter()
+	{
+		Debug.Log ("Collided with a wall");
 	}
 	
-	// Update is called once per frame
-	void FixedUpdate () {
-		if (Input.GetButtonDown ("Jump")) {
-			rigidbody.velocity = new Vector2 (0, 10);
-		}
-	}
+
 }

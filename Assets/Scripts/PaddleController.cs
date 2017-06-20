@@ -5,16 +5,20 @@ using UnityEngine;
 public class PaddleController : MonoBehaviour {
 
 	public int maxSpeed;
-	private GameObject paddle;
+	private Vector3 movement;
+	private Rigidbody2D paddleRigidBody;
 
 	// Use this for initialization
 	void Start () {
-		paddle = GetComponent<GameObject> ();
+		paddleRigidBody = GetComponent<Rigidbody2D> ();
+		movement = new Vector3 ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		var move = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
-		transform.position += move * maxSpeed * Time.deltaTime;
+		movement.Set(Input.GetAxis("Horizontal"), 0, 0);
+		movement = movement.normalized * maxSpeed * Time.deltaTime;
+
+		paddleRigidBody.MovePosition (transform.position + movement);
 	}
 }
